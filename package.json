@@ -1,0 +1,10 @@
+{
+  "name": "conjur-express",
+  "scripts": {
+    "start": "cross-env NODE_ENV=\"production\" node server/build/index.js"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  },
+  "license": "MIT"
+}

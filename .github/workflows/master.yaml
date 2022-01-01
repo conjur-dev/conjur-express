@@ -1,0 +1,19 @@
+name: master
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - uses: actions/setup-node@v1
+      - run: yarn
+        working-directory: server
+      - run: yarn build
+        working-directory: server
+      - run: yarn test
+        working-directory: server
