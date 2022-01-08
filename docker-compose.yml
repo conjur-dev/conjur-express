@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  browserless:
+    image: "browserless/chrome"
+    ports:
+      - "3000"
+  conjur-express:
+    build: .
+    ports:
+      - "8080"
+  e2e:
+    build: tests/

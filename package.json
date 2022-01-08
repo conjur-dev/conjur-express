@@ -1,10 +1,23 @@
 {
-  "name": "conjur-express",
+  "name": "conjure",
+  "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=\"production\" node server/build/index.js"
+    "start": "cross-env NODE_ENV=\"production\" node build/index.js",
+    "start:dev": "babel-node -- ./index.js",
+    "build": "babel -d \"build\" --ignore node_modules --ignore build --ignore client . -s",
+    "test": "jest --modulePathIgnorePatterns client --testPathIgnorePatterns=puppeteer --pass-with-no-tests"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.10.1",
+    "@babel/core": "^7.10.1",
+    "@babel/node": "^7.10.1",
+    "@babel/preset-env": "^7.10.1",
+    "cross-env": "^7.0.3",
+    "express": "^4.17.1",
+    "morgan": "^1.9.1"
   },
   "devDependencies": {
-    "cross-env": "^7.0.3"
+    "jest": "^24.9.0"
   },
   "license": "MIT"
 }
