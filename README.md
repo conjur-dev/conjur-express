@@ -28,51 +28,25 @@ cd <PROJECT_NAME>
 git submodule update --init --recursive
 ```
 
-Building backend.
-
-```bash
-cd server
-yarn build
-```
-
-Building frontend.
-
-```bash
-cd client
-yarn build
-```
-
 ## Development
 
 Start the development backend server, default listening on port :8080.
 
 ```bash
-cd server
 yarn start:dev
 ```
 
-Start a development server for frontend, default listening on port :3000.
-
-```bash
-cd client
-yarn start
-```
+Refer to `README.md` in `client/` for instructions on starting a development server for frontend.
 
 ## Production
 
 Create backend production build.
 
 ```bash
-cd server
 yarn build
 ```
 
-Create an optimized frontend production build.
-
-```bash
-cd client
-yarn build
-```
+Refer to `README.md` in `client/` for instructions on building frontend.
 
 Start the backend server.
 

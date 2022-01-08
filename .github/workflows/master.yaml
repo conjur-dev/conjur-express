@@ -1,19 +1,61 @@
 name: master
 on:
   push:
-    branches: [master]
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
   workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - run: yarn install
+      - run: yarn build
+      - uses: actions/upload-artifact@v2
+        with:
+          name: conjur-express
+          path: |
+            build/
+  build-conjur:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: client
+    steps:
+      - uses: actions/checkout@v2
         with:
           submodules: recursive
       - uses: actions/setup-node@v1
-      - run: yarn
-        working-directory: server
+      - run: yarn install
       - run: yarn build
-        working-directory: server
+      - uses: actions/upload-artifact@v2
+        with:
+          name: conjur
+          path: |
+            client/build/
+  e2e:
+    needs: [build, build-conjur]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: conjur-express
+          path: build/
+      - uses: actions/download-artifact@v2
+        with:
+          name: conjur
+          path: client/build/
+      - run: docker-compose up --build -d
+      - run: docker-compose run e2e yarn test
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - run: yarn install
       - run: yarn test
-        working-directory: server
