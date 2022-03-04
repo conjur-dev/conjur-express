@@ -23,12 +23,27 @@ yarn --version
 Clone this repository.
 
 ```bash
-git clone https://github.com/conjur-dev/conjur-express.git <PROJECT_NAME>
-cd <PROJECT_NAME>
+git clone https://github.com/conjur-dev/conjur-express.git
+cd conjur-express
 git submodule update --init --recursive
 ```
 
+Install frontend dependencies.
+
+```bash
+cd client
+yarn install
+```
+
+Install backend dependencies.
+
+```bash
+yarn install
+```
+
 ## Development
+
+A development environment consists of a backend dev server and a front end dev server.
 
 Start the development backend server, default listening on port :8080.
 
@@ -36,19 +51,40 @@ Start the development backend server, default listening on port :8080.
 yarn start:dev
 ```
 
-Refer to `README.md` in `client/` for instructions on starting a development server for frontend.
+Start the development frontend server, default listening on port :3000.
+```bash
+cd client
+yarn start:dev
+```
 
 ## Production
 
-Create backend production build.
+A production environment consists of a production build frontend served by a production build backend server. 
+
+Create an optimized frontend production build. The output would be in `/client/build`.
+
+```bash
+cd client
+yarn build
+```
+
+Build the backend server. The output would be in `/build`.
 
 ```bash
 yarn build
 ```
 
-Refer to `README.md` in `client/` for instructions on building frontend.
+These build artifacts should be used in production server.
 
-Start the backend server.
+```
+README.md
+package.json
+yarn.lock
+/build
+/client/build
+```
+
+Start the backend server. It serves the frontend build from `/client/build`.
 
 ```bash
 yarn start
