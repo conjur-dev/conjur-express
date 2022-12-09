@@ -1,23 +1,27 @@
 {
   "name": "conjure",
-  "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=\"production\" node build/index.js",
-    "start:dev": "babel-node -- ./index.js",
-    "build": "babel -d \"build\" --ignore node_modules --ignore build --ignore client . -s",
-    "test": "jest --modulePathIgnorePatterns client --testPathIgnorePatterns=puppeteer --pass-with-no-tests"
+    "start:dev": "ts-node ./src/index.ts",
+    "build": "tsc",
+    "test": "jest --modulePathIgnorePatterns build --modulePathIgnorePatterns client --testPathIgnorePatterns=puppeteer --pass-with-no-tests"
   },
   "dependencies": {
-    "@babel/cli": "^7.10.1",
-    "@babel/core": "^7.10.1",
-    "@babel/node": "^7.10.1",
-    "@babel/preset-env": "^7.10.1",
     "cross-env": "^7.0.3",
     "express": "^4.17.1",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "winston": "^3.8.2"
   },
   "devDependencies": {
-    "jest": "^24.9.0"
+    "@types/express": "^4.17.14",
+    "@types/jest": "^29.2.3",
+    "@types/morgan": "^1.9.3",
+    "@types/node": "^18.11.9",
+    "jest": "^29.0.0",
+    "jest-mock-extended": "^3.0.1",
+    "ts-jest": "^29.0.3",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.4"
   },
   "license": "MIT"
 }
